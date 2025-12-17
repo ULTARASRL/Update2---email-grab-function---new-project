@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/instructions",
+      "statusCode": 301
+    }
+  ],
+  "routes": [
+    {
+      "src": "/instructions",
+      "dest": "/"
+    },
+    {
+      "src": "/instructions/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}

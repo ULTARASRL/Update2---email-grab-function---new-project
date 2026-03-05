@@ -61,23 +61,27 @@ const Popup: React.FC = () => {
 
     const formData = new FormData(e.currentTarget);
     
-    // Append timestamp if not already in the form (though it is, via hidden input)
-    // formData.append('timestamp', new Date().toISOString());
+    // Create a promise that resolves after 2 seconds to prevent hanging
+    const timeoutPromise = new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+    });
+
+    const submitPromise = fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' 
+    });
 
     try {
-        // Use fetch with no-cors mode to send data to Google Scripts
-        await fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: formData,
-            mode: 'no-cors' 
-        });
+        // Race the fetch against the timeout. Whichever finishes first allows the UI to proceed.
+        // This solves issues where Google Apps Script redirects might hang the fetch promise in some environments.
+        await Promise.race([submitPromise, timeoutPromise]);
         
-        // Wait a tiny bit just to ensure smooth UI transition
         handleSuccess();
     } catch (error) {
         console.error("Submission error:", error);
         // Even if it fails (network error), we usually show success to the user 
-        // to avoid confusion on landing pages, or you could show an error state.
+        // to avoid confusion on landing pages.
         handleSuccess();
     } finally {
         setIsSubmitting(false);

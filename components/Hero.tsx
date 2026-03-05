@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
             Water-resistant, hypoallergenic, and built for your active lifestyle.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <a 
               href="#instructions"
               onClick={scrollToInstructions}
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
             </a>
           </div>
 
-          <div className="flex flex-wrap gap-6 md:gap-8 pt-5 border-t border-white/10 w-full justify-center">
+          <div className="flex flex-wrap gap-6 md:gap-8 pt-2 border-t border-white/10 w-full justify-center">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-brand-teal/10 rounded-full text-brand-teal">
                 <Droplets size={20} />
@@ -74,34 +74,27 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Video Section Moved Here */}
-          <div className="w-full mt-10 pb-10">
-            <h3 className="text-3xl md:text-4xl font-bold text-[#F97316] text-center mb-2">
-              See Exactly How to Apply the Patch <br /> (1-minute video)
-            </h3>
-            
-            {/* Red Banner */}
-            <div className="bg-[#EF4444] py-3 px-4 text-center mb-4 w-full shadow-md rounded-lg">
-              <p className="text-white font-bold text-lg md:text-xl">
-                Don't Miss Out! See the step by step process of applying the patches:
-              </p>
-            </div>
+          <motion.h3 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-3xl font-bold text-white text-center mt-6 mb-4"
+          >
+            See Exactly How to Apply the Patch
+          </motion.h3>
 
-            {/* Video Player */}
-            <div className="bg-black rounded-xl overflow-hidden aspect-video w-full max-w-3xl mx-auto shadow-2xl relative group cursor-pointer border border-white/10">
-              <img 
-                  src="https://picsum.photos/1200/800" 
-                  alt="Application Video" 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-50 transition-opacity"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-[#2DD4BF] rounded-full flex items-center justify-center pl-2 shadow-xl group-hover:scale-110 transition-transform">
-                      <Play className="text-white fill-current" size={40} />
-                  </div>
-              </div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center gap-3 text-brand-teal font-bold"
+          >
+            <div className="w-10 h-10 rounded-full bg-brand-teal/10 flex items-center justify-center">
+              <Play size={20} fill="currentColor" />
             </div>
-          </div>
-
+            <span>Quick 30-Second Video</span>
+          </motion.div>
         </motion.div>
       </div>
     </section>

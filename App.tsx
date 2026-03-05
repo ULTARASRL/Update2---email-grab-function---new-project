@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import VideoSection from './components/VideoSection';
 import InstructionSection from './components/InstructionSection';
 import Footer from './components/Footer';
 import Popup from './components/Popup';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
         {route === 'home' ? (
           <>
             <Hero />
+            <VideoSection />
             <InstructionSection />
             <Popup />
           </>
